@@ -94,6 +94,19 @@ Let's explore each case in detail:
 
 These rotation operations ensure that the AVL tree maintains its balanced property, where the heights of the left and right subtrees of each node differ by at most 1. By performing these rotations when necessary, the tree avoids becoming skewed and maintains efficient search, insertion, and deletion operations with a time complexity of O(log n).
 
+## Prefix Search 
+The prefixSearchNode function performs a prefix search in the AVL tree. It takes a node pointer and a prefix string as parameters. Here's how the prefix search is implemented:
+
+1. If the current node is nullptr, which means we have reached the end of the subtree, we return and stop the recursion.
+
+1. We check if the name of the contact stored in the current node starts with the given prefix. If it does, we print the contact's name and phone number, indicating a match.
+
+1. We compare the prefix with the beginning of the contact's name. If the prefix is less than or equal to the contact's name (lexicographically), we recursively call the prefixSearchNode function on the left subtree of the current node. This is because any contact with a name greater than or equal to the prefix will be found in the left subtree due to the properties of a binary search tree.
+
+1. Regardless of the previous condition, we always recursively call the prefixSearchNode function on the right subtree of the current node. This is because there may be contacts with names that start with the prefix in the right subtree.
+
+The prefix search feature is a valuable functionality of the phone book project. It allows users to find contacts by typing a partial name or prefix, and the program returns all contacts whose names match the given prefix. This feature enables quick and efficient search based on partial names, making it convenient for users with large contact lists.
+
 ## Operations and Time Complexity
 - Insertion: Inserting a new contact into the AVL tree takes O(log n) time complexity on average, where n is the number of contacts in the tree. The AVL tree automatically performs rotations and re-balancing if necessary to maintain its height balance.
 - Deletion: Deleting a contact from the AVL tree also takes O(log n) time complexity on average. Similar to insertion, the AVL tree adjusts its structure to maintain balance after the deletion operation.
