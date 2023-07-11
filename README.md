@@ -16,6 +16,84 @@ Phonebook with AVL Trees is a command-line application written in C++ that allow
 
 The Phonebook utilizes AVL trees, a self-balancing binary search tree, to store and organize the contacts. AVL trees maintain balance through rotations, which ensures efficient search and insertion operations even in the presence of frequent modifications.
 
+## Left Rotation
+A left rotation is a restructuring operation performed on a node in the AVL tree. It aims to restore balance to the tree by adjusting the positions of nodes. The left rotation involves promoting the right child of the current node as the new root, while the current node becomes the left child of the new root.
+
+Here's a step-by-step breakdown of the left rotation process:
+
+1. Identify the node on which the left rotation is to be performed. Let's call this node A.
+1. Assign the right child of A as the new root. Let's call this node B.
+1. Make the left child of B the right child of A.
+1. Update the height of A by calculating the maximum height between its left and right subtrees plus one.
+1. Update the height of B by calculating the maximum height between its left and right subtrees plus one.
+1. Return B as the new root of the rotated subtree.
+1. The purpose of the left rotation is to balance the tree when a node becomes right-heavy. By performing the left rotation, we move a node from the right subtree to the left subtree, which can help maintain the AVL tree's balance condition.
+
+## Right Rotation
+A right rotation is the counterpart of the left rotation and is used to balance the tree when a node becomes left-heavy. It involves promoting the left child of the current node as the new root, while the current node becomes the right child of the new root.
+
+Here's a step-by-step breakdown of the right rotation process:
+
+1. Identify the node on which the right rotation is to be performed. Let's call this node A.
+1. Assign the left child of A as the new root. Let's call this node B.
+1. Make the right child of B the left child of A.
+1. Update the height of A by calculating the maximum height between its left and right subtrees plus one.
+1. Update the height of B by calculating the maximum height between its left and right subtrees plus one.
+1. Return B as the new root of the rotated subtree.
+1. The right rotation helps in maintaining the balance of the AVL tree by moving a node from the left subtree to the right subtree.
+
+## Note 
+It's important to remember that rotations can be performed multiple times in succession, depending on the specific situation, to restore the balance of the tree. The rotations help in maintaining the AVL property, which ensures that the tree's height remains logarithmic in relation to the number of nodes, resulting in efficient search and insertion operations.
+
+## Find Minimum Node
+The findMinNode function in AVL trees is used to find the node with the minimum value in a given subtree. It is commonly used during the deletion operation when we need to find the successor of a node.
+
+Here's how the findMinNode function works:
+
+1. Start with the given node, which represents the root of the subtree.
+1. Iterate through the left children of each node until we reach a node that does not have a left child (i.e., node->left == nullptr).
+1. Return the current node, which represents the node with the minimum value in the subtree.
+
+In an AVL tree, the leftmost node (the node with the smallest value) will always be the leftmost child of the leftmost child, and so on. Therefore, by traversing the left child pointers until reaching a null left child, we can find the node with the minimum value in the subtree.
+
+### In AVL trees, the Left-Left and Right-Right cases, as well as the Left-Right and Right-Left cases, are rotation operations performed to maintain the balance of the tree when it becomes unbalanced due to node insertions or deletions.
+
+Let's explore each case in detail:
+
+1. Left-Left Case:
+
+- Condition: The left subtree of the left child of a node is higher by 2 or more levels compared to the right subtree of the left child.
+- Situation: The left subtree of the left child is too heavy.
+- Solution: To restore balance, a right rotation is performed.
+- Process: The left child becomes the new root of the subtree, and the original root becomes the right child of the new root. The right subtree of the new root remains unchanged.
+- Effect: The heights of both the left and right subtrees are adjusted, and the overall balance of the tree is restored.
+
+2. Right-Right Case:
+
+- Condition: The right subtree of the right child of a node is higher by 2 or more levels compared to the left subtree of the right child.
+- Situation: The right subtree of the right child is too heavy.
+- Solution: To restore balance, a left rotation is performed.
+- Process: The right child becomes the new root of the subtree, and the original root becomes the left child of the new root. The left subtree of the new root remains unchanged.
+- Effect: The heights of both the left and right subtrees are adjusted, and the overall balance of the tree is restored.
+
+3. Left-Right Case:
+
+- Condition: The right subtree of the left child of a node is higher by 2 or more levels compared to the left subtree of the right child.
+- Situation: The right subtree of the left child is too heavy.
+- Solution: To restore balance, a left rotation is performed on the left child, followed by a right rotation on the original node.
+- Process: First, a left rotation is performed on the left child. Then, a right rotation is performed on the original node. This sequence of rotations brings the tree into a balanced state.
+- Effect: The heights of both the left and right subtrees are adjusted, and the overall balance of the tree is restored.
+
+4. Right-Left Case:
+
+- Condition: The left subtree of the right child of a node is higher by 2 or more levels compared to the right subtree of the left child.
+- Situation: The left subtree of the right child is too heavy.
+- Solution: To restore balance, a right rotation is performed on the right child, followed by a left rotation on the original node.
+- Process: First, a right rotation is performed on the right child. Then, a left rotation is performed on the original node. This sequence of rotations brings the tree into a balanced state.
+- Effect: The heights of both the left and right subtrees are adjusted, and the overall balance of the tree is restored.
+
+These rotation operations ensure that the AVL tree maintains its balanced property, where the heights of the left and right subtrees of each node differ by at most 1. By performing these rotations when necessary, the tree avoids becoming skewed and maintains efficient search, insertion, and deletion operations with a time complexity of O(log n).
+
 ## Operations and Time Complexity
 - Insertion: Inserting a new contact into the AVL tree takes O(log n) time complexity on average, where n is the number of contacts in the tree. The AVL tree automatically performs rotations and re-balancing if necessary to maintain its height balance.
 - Deletion: Deleting a contact from the AVL tree also takes O(log n) time complexity on average. Similar to insertion, the AVL tree adjusts its structure to maintain balance after the deletion operation.
